@@ -22,7 +22,7 @@ function K_MAKE() {
   
   ANDROID_MAJOR_VERSION=s \
   PLATFORM_VERSION=12 \
-  make O=out ARCH=arm64 CONFIG_SECTION_MISMATCH_WARN_ONLY=y CONFIG_DEBUG_SECTION_MISMATCH=y $options
+  make O=out ARCH=arm64 $options
 }
 
 K_MAKE mrproper
@@ -33,7 +33,7 @@ K_MAKE -j$(nproc --all)
 # AIK pack
 echo "[BUILD]: AIK pack.."
 
-cp -rv ./out/arch/arm64/boot/Image ./AnyKernel3/Image
+cp -rv ./out/arch/arm64/boot/Image ./AnyKernel3/Image || exit 1
 
 cd AnyKernel3 || exit 1
 TIMESTAMP=$(date +"%Y-%m-%dT%H-%M-%S")
